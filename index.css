@@ -212,19 +212,16 @@ body {
   }
 }
 
-.details {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(233, 224, 255, 0.6), rgba(255, 250, 255, 0.85));
-  backdrop-filter: blur(6px);
+.details.active {
+  opacity: 1;
+  pointer-events: auto;
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* allow scrolling from top */
   justify-content: center;
+  overflow-y: auto; /* enable vertical scrolling */
   padding: 2rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .6s ease
 }
+
 
 .details.active {
   opacity: 1;
@@ -233,6 +230,8 @@ body {
 
 .card {
   width: min(900px, 96%);
+  max-height: 90vh; /* restrict to viewport height */
+  overflow-y: auto; /* scroll inside card if content exceeds */
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95));
   border-radius: 20px;
   padding: 24px;
@@ -241,7 +240,7 @@ body {
   grid-template-columns: 1fr 300px;
   gap: 20px;
   animation: slideUp 0.8s ease forwards;
-  opacity: 0
+  opacity: 0;
 }
 
 .details.active .card {
@@ -477,4 +476,5 @@ body {
   .right {
     order: 2
   }
+
 }
