@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BSCS 1B</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@400;700&family=Great+Vibes&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="index.css" />
+
+  <style>
+    .card {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .left {
+      flex: 2;
+    }
+
+    .right {
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .card {
+        flex-direction: column;
+      }
+
+      .left,
+      .right {
+        width: 100%;
+      }
+
+      .event-name {
+        text-align: center;
+        font-size: 1.4rem;
+      }
+
+      .meta {
+        text-align: center;
+      }
+
+      .prog-item {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <main class="intro" id="intro">
+      <div class="sparkles"></div>
+      <div class="envelope-stage">
+        <div class="envelope" role="button" aria-label="Open invitation">
+          <div class="flap"></div>
+          <div class="sheet">
+            <div style="font-family:'Great Vibes', cursive;font-size:1.4rem;color:var(--accent)">You're invited</div>
+            <div style="margin-top:6px;color:var(--muted);font-size:0.95rem">Welcome CS 1B</div>
+          </div>
+          <div class="stamp">Year End Party 2k25</div>
+        </div>
+        <div class="cta">Open Invitation</div>
+      </div>
+    </main>
+
+    <div class="snow-container"></div>
+
+    <aside class="details" id="details" aria-hidden="true">
+      <div class="card" role="dialog" aria-labelledby="eventName">
+
+        <div class="left">
+          <h2 id="eventName" class="event-name">CS 1B Year End Party 2k25</h2>
+          <div class="meta">You can wear anything you want!</div>
+
+          <div class="section">
+            <h3>Venue</h3>
+            <div class="info">
+              <strong>Encantadia</strong>
+              <div style="margin-top:6px;color:var(--muted);font-size:0.95rem">
+                #95 Purok 3 Barangay Tanyag, Taguig City<br>
+                <a href="https://maps.app.goo.gl/67xVB67anj3EDQUD9" target="_blank">View on Google Maps</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>When</h3>
+            <div class="info">
+              <strong>Friday, December 19, 2025</strong>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>Overall Program</h3>
+            <div class="program">
+              <div class="prog-item">
+                <div class="time">11:00 AM</div>
+                <div class="prog-desc">Call Time</div>
+              </div>
+
+              <div class="prog-item">
+                <div class="time">11:30 AM</div>
+                <div class="prog-desc">Program Start</div>
+                <div class="prog-desc">Picture Taking</div>
+              </div>
+
+              <div class="prog-item">
+                <div class="time">1:00 – 3:00 PM</div>
+                <div class="prog-desc">Lunch</div>
+                <div class="prog-desc">Reading NGL</div>
+              </div>
+
+              <div class="prog-item">
+                <div class="time">4:00 – 5:00 PM</div>
+                <div class="prog-desc">Games</div>
+              </div>
+
+              <div class="prog-item">
+                <div class="time">6:00 – 8:00 PM</div>
+                <div class="prog-desc">Party Time</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="box">
+            <strong>Notes</strong>
+            <div style="margin-top:8px;color:var(--muted);font-size:0.95rem">
+              This will be a fun and chill event — enjoy, enjoy lang, laugh, mingle, and make memories.<br><br>
+              There will still be picture taking before and during the program.
+            </div>
+          </div>
+
+          <div class="box">
+            <strong>Rules & Reminders</strong>
+            <div style="margin-top:8px;color:var(--muted);font-size:0.95rem">
+              Even if this is a party, always be mindful of your actions. Know your limits, be respectful to everyone,
+              and be mature enough to know when to stop. Let’s keep the event safe, enjoyable, and drama-free for all.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    const intro = document.getElementById('intro');
+    const details = document.getElementById('details');
+    const snowContainer = document.querySelector('.snow-container');
+
+    intro.addEventListener('click', () => {
+      intro.classList.add('open');
+      setTimeout(() => {
+        details.classList.add('active');
+        details.setAttribute('aria-hidden', 'false');
+        intro.style.pointerEvents = 'none';
+        createSnow(40);
+      }, 600);
+    });
+
+    function createSnow(count) {
+      for (let i = 0; i < count; i++) {
+        const snow = document.createElement('div');
+        snow.classList.add('snowflake');
+
+        snow.style.left = `${Math.random() * 100}vw`;
+        const size = 4 + Math.random() * 6;
+        snow.style.width = `${size}px`;
+        snow.style.height = `${size}px`;
+        snow.style.animationDuration = `${5 + Math.random() * 5}s`;
+        snow.style.setProperty('--drift', `${-30 + Math.random() * 60}px`);
+
+        snowContainer.appendChild(snow);
+        snow.addEventListener('animationend', () => snow.remove());
+      }
+
+      setTimeout(() => createSnow(count / 2), 1000);
+    }
+  </script>
+</body>
+
+</html>
