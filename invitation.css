@@ -1,0 +1,480 @@
+:root {
+  --bg: #fbf7ff;
+  --soft-purple: #d9c7ff;
+  --pastel-purple: #c9b3ff;
+  --accent: #b590ff;
+  --muted: #9b89a8;
+  --card: #fff;
+  --glass: rgba(255, 255, 255, 0.6);
+  --shadow: 0 8px 30px rgba(139, 101, 255, 0.12);
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+html,
+body {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg), #f6f2ff 60%);
+  color: #2b2140;
+  overflow: hidden;
+}
+
+.wrap {
+  height: 100vh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 2rem
+}
+
+.intro {
+  width: min(600px, 90%);
+  height: min(400px, 80%);
+  background: linear-gradient(135deg, rgba(201, 179, 255, 0.35), rgba(217, 199, 255, 0.22));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  cursor: pointer;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+.sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none
+}
+
+.sparkles:before,
+.sparkles:after {
+  content: '';
+  position: absolute;
+  width: 18vmax;
+  height: 18vmax;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55
+}
+
+.sparkles:before {
+  background: radial-gradient(circle at 30% 30%, #efe6ff 0%, transparent 45%);
+  left: -8vmax;
+  top: -6vmax
+}
+
+.sparkles:after {
+  background: radial-gradient(circle at 70% 70%, #f3e8ff 0%, transparent 45%);
+  right: -8vmax;
+  bottom: -6vmax
+}
+
+.envelope-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  z-index: 2;
+  animation: fadeIn 1.6s ease forwards;
+  opacity: 0
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+.envelope {
+  width: 220px;
+  height: 140px;
+  background: linear-gradient(180deg, var(--card), var(--glass));
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 6px 24px rgba(80, 58, 140, 0.12);
+  transform-origin: center;
+  transition: transform .6s cubic-bezier(.2, .9, .3, 1);
+  animation: pop 1s ease forwards
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8)
+  }
+
+  100% {
+    transform: scale(1)
+  }
+}
+
+.envelope .flap {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  clip-path: polygon(0 0, 100% 0, 50% 42%);
+  background: linear-gradient(180deg, var(--pastel-purple), var(--soft-purple));
+  transform-origin: top center;
+  transition: transform .65s cubic-bezier(.2, .9, .3, 1)
+}
+
+.envelope .sheet {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 18px;
+  bottom: 18px;
+  background: linear-gradient(180deg, #fff, rgba(255, 255, 255, 0.96));
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all .6s ease
+}
+
+.envelope .stamp {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  border-radius: 6px;
+  padding: 5px 6px;
+  font-size: .75rem;
+  background: linear-gradient(180deg, #fff5ff, #f6edff);
+  box-shadow: 0 6px 14px rgba(139, 101, 255, 0.08)
+}
+
+.intro.open .envelope {
+  transform: translateY(-16px) scale(1.04)
+}
+
+.intro.open .envelope .flap {
+  transform: rotateX(180deg) translateY(-10%)
+}
+
+.intro.open .envelope .sheet {
+  opacity: 1;
+  transform: translateY(0)
+}
+
+.cta {
+  font-family: 'Poppins';
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 6px 20px rgba(139, 101, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  animation: pulse 2s infinite
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1
+  }
+}
+
+.details {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(233, 224, 255, 0.6), rgba(255, 250, 255, 0.85));
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .6s ease
+}
+
+.details.active {
+  opacity: 1;
+  pointer-events: auto
+}
+
+.card {
+  width: min(900px, 96%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95));
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  animation: slideUp 0.8s ease forwards;
+  opacity: 0
+}
+
+.details.active .card {
+  opacity: 1
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
+}
+
+.left {
+  padding: 6px 12px
+}
+
+.event-name {
+  font-family: 'Playfair Display';
+  font-size: 1.8rem;
+  margin: 0
+}
+
+.meta {
+  color: var(--muted);
+  margin-top: 6px
+}
+
+.section {
+  margin-top: 16px
+}
+
+.section h3 {
+  font-size: 1rem;
+  margin: 0 0 10px 0;
+  font-weight: 600
+}
+
+.info {
+  background: linear-gradient(180deg, rgba(201, 179, 255, 0.12), rgba(217, 199, 255, 0.06));
+  padding: 12px;
+  border-radius: 12px
+}
+
+.program {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
+}
+
+.prog-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start
+}
+
+.time {
+  min-width: 80px;
+  font-weight: 600
+}
+
+.prog-desc {
+  color: #3b2f53
+}
+
+.right {
+  padding: 12px;
+  background: linear-gradient(180deg, #faf5ff, #fff);
+  border-radius: 12px
+}
+
+.box {
+  background: linear-gradient(180deg, #fff, #fff);
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 18px rgba(98, 73, 168, 0.06)
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 0;
+  font-weight: 600;
+  cursor: pointer
+}
+
+.btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(139, 101, 255, 0.12)
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, var(--accent), #8f6cff);
+  color: white
+}
+
+/* Enhance card entrance */
+.details.active .card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: slideUp 0.8s ease forwards, cardPop 0.8s ease forwards;
+}
+
+@keyframes cardPop {
+  0% {
+    transform: translateY(30px) scale(0.95);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Right panel fade-in for each box */
+.right .box {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: boxFadeUp 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.details.active .right .box:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.details.active .right .box:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.details.active .right .box:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes boxFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add hover animation for CTA button and envelope */
+.cta:hover {
+  transform: scale(1.08);
+  transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+  transform: translateY(-16px) scale(1.06);
+}
+
+/* Subtle sparkle animation */
+.sparkles:before,
+.sparkles:after {
+  animation: sparkleMove 4s infinite alternate;
+}
+
+@keyframes sparkleMove {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: translate(10px, -10px) scale(1.1);
+    opacity: 0.65;
+  }
+
+  100% {
+    transform: translate(-10px, 10px) scale(1);
+    opacity: 0.55;
+  }
+}
+
+.snow-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: visible;
+  /* ensure snowflakes are visible */
+  z-index: 1;
+  /* above background but below main content */
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, rgba(181, 144, 255, 0.8) 0%, rgba(181, 144, 255, 0) 70%);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  /* animation-duration is set dynamically in JS */
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(110vh) translateX(var(--drift, 0px));
+    opacity: 0.2;
+  }
+}
+
+
+@media (max-width:880px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .right {
+    order: 2
+  }
+}
