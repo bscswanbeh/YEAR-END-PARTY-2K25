@@ -25,9 +25,25 @@
       flex: 1;
     }
 
+    .details {
+      overflow: hidden;
+    }
+
     @media (max-width: 768px) {
+      body {
+        overflow: hidden;
+      }
+
+      .details.active {
+        position: fixed;
+        inset: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
       .card {
         flex-direction: column;
+        min-height: 100%;
       }
 
       .left,
